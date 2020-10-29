@@ -5,6 +5,7 @@ import Home from './pages/home/index';
 import Login from './pages/login/index';
 import Timeline from './pages/admin/timeline';
 import Objetivo from './pages/admin/objetivo';
+import CrudTurma from './pages/admin/crudturma';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jwt_decode from 'jwt-decode';
@@ -40,6 +41,7 @@ const routing = (
       <Route path='/login' component={Login} />
       <RotaPrivadaAdmin path='/admin/timeline' component={Timeline}/>
       <RotaPrivadaAdmin path='/admin/crudobjetivos' component={Objetivo}/>
+      <RotaPrivadaAdmin path='/admin/crudturma' component={CrudTurma}/>
      </Switch>
    </div>
  </Router>
