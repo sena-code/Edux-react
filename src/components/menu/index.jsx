@@ -35,11 +35,19 @@ const Menu = () => {
         } else if( jwt_decode(token).role === "Administrador"){
             return (
                 <Nav>
-                   
+                   <Button href="/admin/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
                     <DropdownButton id="dropdown-basic-button" variant="success" title="Cadastrar">
+                    <Dropdown.Item href="/admin/crudcursos">Curso</Dropdown.Item>
+                    <Dropdown.Divider />
                     <Dropdown.Item href="/admin/cruddicas">Dica</Dropdown.Item>
                     <Dropdown.Divider />
+                    <Dropdown.Item href="/admin/crudinstituicoes">Instituição</Dropdown.Item>
+                    <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudobjetivos">Objetivo</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="/admin/crudobjetivosA">Objetivo Aluno</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="/admin/crudprofessores">Professor em turma</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudturmas">Turma</Dropdown.Item>
                     <Dropdown.Divider />

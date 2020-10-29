@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './pages/home/index';
 import Login from './pages/login/index';
-import Timeline from './pages/admin/timeline'
+import Timeline from './pages/admin/timeline';
+import Objetivo from './pages/admin/objetivo';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jwt_decode from 'jwt-decode';
@@ -38,6 +39,7 @@ const routing = (
      <Route exact path='/' component={Home} />
       <Route path='/login' component={Login} />
       <RotaPrivadaAdmin path='/admin/timeline' component={Timeline}/>
+      <RotaPrivadaAdmin path='/admin/crudobjetivos' component={Objetivo}/>
      </Switch>
    </div>
  </Router>
