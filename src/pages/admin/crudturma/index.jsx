@@ -7,18 +7,30 @@ import Rodape from '../../../components/rodape/index'
 const CrudTurma = () => {
     const [id, setId] = useState(0);
     const [descricao, setDescricao] = useState('');
-    const [idCurso, setIdCurso] = useState([]);
+    const [curso, setCurso] = useState([]);
     const [ turmas, setTurma] = useState([]);
+    const[idCurso, setIdCurso] = useState('');
     
     useEffect(() => {
         listarTurma();
+        listarCurso();
     }, [])
   
      const listarTurma = () =>{
-        fetch('${url}/Turma')
+        fetch(`${url}/Turma`)
         .then(response => response.json())
         .then(dados => {
             setTurma(dados.data);
+            
+            limparCampo();
+        })
+        .catch(err => console.error(err));
+     }
+     const listarCurso = () =>{
+        fetch(`${url}/Curso`)
+        .then(response => response.json())
+        .then(data => {
+            setCurso(data.data);
             
             limparCampo();
         })
@@ -51,33 +63,35 @@ const CrudTurma = () => {
      }
     
      //Metodo para adicionar uma turma
-     const adicionar = (event) =>{
+     const salvar = (event) => {
         event.preventDefault();
 
-        const turma = {
-            descricao : descricao,
-            idCurso : idCurso
+        const evento = {
+            idCurso : idCurso,
+            descricao : descricao
+
         }
 
+        //if ternário para saber se vai fazer um post ou put
         let method = (id === 0 ? 'POST' : 'PUT');
-        let urlRequest = (id === 0 ? `${url}/Turma` :  `${url}/Turma/${id}`);
+        let urlRequest = (id === 0 ? `${url}/turma` : `${url}/turma/${id}`);
 
-         fetch(url + '' + event.target.value,{
-             method : 'POST',
-             body : JSON.stringify(turma),
-             headers : {
+        fetch(urlRequest, {
+            method : method,
+            body : JSON.stringify(evento),
+            headers : {
                 'content-type' : 'application/json',
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
-             }
-         }) 
-         .then(response => response.json())
-         .then(dados => {
-             alert('Turma cadastrada');
- 
-             listarTurma();
-         })
+            }
+        })
+        .then(response => response.json())
+        .then(dados => {
+            alert('Evento salva');
 
-     }
+            listarTurma();
+        })
+        .catch(err => console.error(err))
+    }
      //Metodo para editar uma turma
      const editar = (event) =>{
          event.preventDefault();
@@ -104,7 +118,7 @@ const CrudTurma = () => {
 
             <Card>
                     <Card.Body>
-                    <Form onSubmit={event => adicionar(event)}>
+                    <Form onSubmit={event => salvar(event)}>
                         
                         <Form.Group controlId="formDescricao">
                             <Form.Label>Descrição</Form.Label>
@@ -116,7 +130,7 @@ const CrudTurma = () => {
                             <Form.Control as="select" value={idCurso} onChange={ event => setIdCurso(event.target.value)}>
                                 <option value={0}>Selecione</option>
                                 {
-                                    idCurso.map((item, index) => {
+                                    curso.map((item, index) => {
                                         return (
                                             <option key={index} value={item.idCurso}>{item.titulo}</option>
                                         )

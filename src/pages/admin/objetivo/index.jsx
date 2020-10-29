@@ -72,7 +72,7 @@ const Objetivo = () => {
     
 
     let method = (id === 0 ? 'POST' : 'PUT');
-    let urlRequest = (id === 0 ? `${url}/objetivo` :  `${url}/objetivo/${id}`);
+    let urlRequest = (id === 0 ? `${url}/Objetivo` :  `${url}/Objetivo/${id}`);
 
     fetch(urlRequest, {
         method : method,
@@ -175,7 +175,7 @@ const Objetivo = () => {
                                     <th>Descrição</th>
                                     
                                     <th>Ações</th>
-                                    <th>Categoria</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -185,6 +185,11 @@ const Objetivo = () => {
                                         <tr key={index}>
 
                                             <td>{item.descricao}</td>
+                                  
+                                           
+                                               
+                                            
+                                      
                                           
                                             <td>
                                                 <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>

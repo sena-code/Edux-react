@@ -7,18 +7,34 @@ import Rodape from '../../../components/rodape/index'
 const CrudCurso = () => {
     const [id, setId] = useState(0);
     const [titulo, setTitulo] = useState('');
-    const [idInstituicao, setIdInstituicao] = useState([]);
+    const [idInstituicao, setIdInstituicao] = useState('');
     const [ cursos, setCurso] = useState([]);
+    const [instituicao, setInstituicao] = useState([]);
     
     useEffect(() => {
         listarCurso();
+        listarInstituicao();
     }, [])
   
-     const listarCurso = () =>{
-        fetch('${url}/Curso')
+    const listarInstituicao = () => {
+        fetch(`${url}/Instituicao`, {
+            headers : {
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            }
+
+        })
         .then(response => response.json())
-        .then(dados => {
-            setCurso(dados.data);
+        .then(data => {
+            setInstituicao(data.data);
+
+        
+        })
+    }
+     const listarCurso = () =>{
+        fetch(`${url}/Curso`)
+        .then(response => response.json())
+        .then(data => {
+            setCurso(data.data);
             
             limparCampo();
         })
@@ -43,7 +59,7 @@ const CrudCurso = () => {
             }
         })
         .then(response => response.json())
-        .then(dados => {
+        .then(data => {
             alert('Curso excluido');
 
             listarCurso();
@@ -62,8 +78,8 @@ const CrudCurso = () => {
         let method = (id === 0 ? 'POST' : 'PUT');
         let urlRequest = (id === 0 ? `${url}/Curso` :  `${url}/Curso/${id}`);
 
-         fetch(url + '' + event.target.value,{
-             method : 'POST',
+         fetch(urlRequest ,{
+             method : method,
              body : JSON.stringify(curso),
              headers : {
                 'content-type' : 'application/json',
@@ -90,9 +106,9 @@ const CrudCurso = () => {
         })
         .then(response => response.json())
         .then(dado => {
-            setId(dado.data.id);
-            setTitulo(dado.data.titulo);
-            setIdInstituicao(dado.data.idInstituicao);
+            setId(dado.id);
+            setTitulo(dado.titulo);
+            setIdInstituicao(dado.nome);
         })
     }
      
@@ -116,9 +132,9 @@ const CrudCurso = () => {
                             <Form.Control as="select" value={idInstituicao} onChange={ event => setIdInstituicao(event.target.value)}>
                                 <option value={0}>Selecione</option>
                                 {
-                                    idInstituicao.map((item, index) => {
+                                    instituicao.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.idInstituicao}>{item.titulo}</option>
+                                            <option key={index} value={item.idInstituicao}>{item.nome}</option>
                                         )
                                     })
                                 }
@@ -147,6 +163,11 @@ const CrudCurso = () => {
                                     <tr key={index}>
 
                                         <td>{item.titulo}</td>
+                                <td>{item.idInstituicao =  instituicao.map((item, index) => {
+                                        return (
+                                            <option key={index} value={item.idInstituicao}>{item.nome}</option>
+                                        )
+                                    })}</td>
                                       
                                         <td>
                                             <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>
@@ -167,4 +188,4 @@ const CrudCurso = () => {
     </div>)
   }
 
-  export default CrudTurma;
+  export default CrudCurso;
