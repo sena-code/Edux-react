@@ -7,6 +7,7 @@ import Timeline from './pages/admin/timeline';
 import Objetivo from './pages/admin/objetivo';
 import CrudTurma from './pages/admin/crudturma';
 import CrudCurso from './pages/admin/crudcursos';
+import ObjetivoA from './pages/admin/objetivoA';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jwt_decode from 'jwt-decode';
@@ -44,6 +45,7 @@ const routing = (
       <RotaPrivadaAdmin path='/admin/crudobjetivos' component={Objetivo}/>
       <RotaPrivadaAdmin path='/admin/crudturmas' component={CrudTurma}/>
       <RotaPrivadaAdmin path='/admin/crudcursos' component={CrudCurso}/>
+      <RotaPrivadaAdmin path='/admin/crudobjetivosA' component={ObjetivoA}/>
      </Switch>
    </div>
  </Router>

@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Container, Form, Button, Card, Table } from 'react-bootstrap';
 import {url} from '../../../utils/constants'
 import Menu from '../../../components/menu/index';
-import Rodape from '../../../components/rodape/index'
+import Rodape from '../../../components/rodape/index';
+import Titulo from '../../../components/titulo/index';
 
 const CrudCurso = () => {
     const [id, setId] = useState(0);
@@ -52,7 +53,7 @@ const CrudCurso = () => {
      const remover = (event) => {
         event.preventDefault();
 
-        fetch(url + '/Curso' + event.target.value,{
+        fetch(url + '/Curso/' + event.target.value,{
             method : 'DELETE',
             headers : {
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
@@ -108,13 +109,14 @@ const CrudCurso = () => {
         .then(dado => {
             setId(dado.id);
             setTitulo(dado.titulo);
-            setIdInstituicao(dado.nome);
+            setIdInstituicao(dado.idInstituicao);
         })
     }
      
       return(<div>
             
         <Menu />
+        <Titulo titulo="Cursos" chamada="Gerencie os cursos"/>
         <Container>
             
 
@@ -134,7 +136,7 @@ const CrudCurso = () => {
                                 {
                                     instituicao.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.idInstituicao}>{item.nome}</option>
+                                            <option key={index} value={item.id}>{item.nome}</option>
                                         )
                                     })
                                 }
@@ -154,6 +156,9 @@ const CrudCurso = () => {
                                 <th>Titulo</th>
                                 
                                 <th>Instituição</th>
+
+                                
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>

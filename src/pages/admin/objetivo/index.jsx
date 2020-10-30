@@ -2,13 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {url} from '../../../utils/constants'
 import { Container, Form, Button, Card, Table } from 'react-bootstrap';
 import Menu from '../../../components/menu/index';
-import Rodape from '../../../components/rodape/index'
+import Rodape from '../../../components/rodape/index';
+import Titulo from '../../../components/titulo/index';
 
 const Objetivo = () => {
 
     const [ id, setId ] = useState(0);
     const [descricao, setDescricao] = useState('');
-    const [idCategoria, setidCategoria] = useState('');
+    const [idCategoria, setIdCategoria] = useState('');
     const [objetivos, setObjetivo] = useState([]);
     const [categorias, setCategorias] = useState([]);
 
@@ -58,7 +59,8 @@ const Objetivo = () => {
     const limparCampos = () => {
             
             setId(0);    
-            setidCategoria('');
+            setIdCategoria('');
+            
             setDescricao('');
     }
 
@@ -84,7 +86,7 @@ const Objetivo = () => {
     })
     .then(response => response.json())
         .then(dados => {
-           
+           console.log(dados);
             alert('Objetivo salvo');
 
             listarObjetivos();
@@ -103,9 +105,10 @@ const Objetivo = () => {
         .then(response => response.json())
         .then(dado => {
           
-            setId(dado.data.id);
-            setidCategoria(dado.data.idCategoria);
-            setDescricao(dado.data.descricao);
+            setId(dado.id)
+            setIdCategoria(dado.idCategoria);
+            setDescricao(dado.descricao);
+            console.log(dado);
         })
     }
 
@@ -131,6 +134,7 @@ const Objetivo = () => {
         <div>
             
             <Menu />
+            <Titulo titulo="Objetivos" chamada="Gerencie os objetivos"/>
             <Container>
                 
 
@@ -145,17 +149,20 @@ const Objetivo = () => {
                             
                             <Form.Group controlId="formDescricao">
                                 <Form.Label>Descrição</Form.Label>
-                                <Form.Control as="textarea" rows={3} value={descricao} onChange={event => setDescricao(event.target.value)} />
-                            </Form.Group>
-                            
-                            <Form.Group controlId="formCategoria">
+                             
+                                        <Form.Control  as="textarea" rows={1} value={descricao} onChange={event => setDescricao(event.target.value)} />
+                                        
+                                 
+                              </Form.Group>
+                     
+                                <Form.Group controlId="formBasicCategoria">
                                 <Form.Label>Categoria</Form.Label>
-                                <Form.Control as="select" value={idCategoria} onChange={ event => setidCategoria(event.target.value)}>
+                                <Form.Control as="select" size="lg" custom defaultValue={idCategoria} onChange={event => setIdCategoria(event.target.value)} >
                                     <option value={0}>Selecione</option>
                                     {
                                         categorias.map((item, index) => {
-                                            return (
-                                                <option key={index} value={item.idCategoria}>{item.tipo}</option>
+                                            return(
+                                                <option key={index} value={item.id}>{item.tipo}</option>
                                             )
                                         })
                                     }
@@ -173,7 +180,7 @@ const Objetivo = () => {
                                 <tr>
                                    
                                     <th>Descrição</th>
-                                    
+                                    <th>Id Categoria</th>
                                     <th>Ações</th>
                                     
                                 </tr>
@@ -185,6 +192,7 @@ const Objetivo = () => {
                                         <tr key={index}>
 
                                             <td>{item.descricao}</td>
+                                    <td>{item.idCategoria}</td>
                                   
                                            
                                                

@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Container, Form, Button, Card, Table } from 'react-bootstrap';
 import {url} from '../../../utils/constants'
 import Menu from '../../../components/menu/index';
-import Rodape from '../../../components/rodape/index'
+import Rodape from '../../../components/rodape/index';
+import Titulo from '../../../components/titulo/index'
 
 const CrudTurma = () => {
     const [id, setId] = useState(0);
@@ -48,7 +49,7 @@ const CrudTurma = () => {
      const remover = (event) => {
         event.preventDefault();
 
-        fetch(url + '/Turma' + event.target.value,{
+        fetch(url + '/Turma/' + event.target.value,{
             method : 'DELETE',
             headers : {
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
@@ -66,7 +67,7 @@ const CrudTurma = () => {
      const salvar = (event) => {
         event.preventDefault();
 
-        const evento = {
+        const turma = {
             idCurso : idCurso,
             descricao : descricao
 
@@ -76,16 +77,19 @@ const CrudTurma = () => {
         let method = (id === 0 ? 'POST' : 'PUT');
         let urlRequest = (id === 0 ? `${url}/turma` : `${url}/turma/${id}`);
 
-        fetch(urlRequest, {
+        fetch(`${urlRequest}`,  {
+            
             method : method,
-            body : JSON.stringify(evento),
+            body : JSON.stringify(turma),
             headers : {
                 'content-type' : 'application/json',
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
         .then(response => response.json())
+         
         .then(dados => {
+            
             alert('Evento salva');
 
             listarTurma();
@@ -104,15 +108,16 @@ const CrudTurma = () => {
         })
         .then(response => response.json())
         .then(dado => {
-            setId(dado.data.id);
-            setDescricao(dado.data.descricao);
-            setIdCurso(dado.data.idCurso);
+            setId(dado.id);
+            setDescricao(dado.descricao);
+            setIdCurso(dado.idCurso);
         })
     }
      
       return(<div>
             
         <Menu />
+        <Titulo titulo="Turmas" chamada="Gerencie turmas"/>
         <Container>
             
 
@@ -132,7 +137,7 @@ const CrudTurma = () => {
                                 {
                                     curso.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.idCurso}>{item.titulo}</option>
+                                            <option key={index} value={item.id}>{item.titulo}</option>
                                         )
                                     })
                                 }
@@ -151,7 +156,7 @@ const CrudTurma = () => {
                                
                                 <th>Descrição</th>
                                 
-                                <th>Curso</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
