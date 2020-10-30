@@ -41,6 +41,7 @@ const routing = (
      <Switch>
      <Route exact path='/' component={Home} />
       <Route path='/login' component={Login} />
+      <Route path='/cadastrar-se' component={Cadastrar} />
       <RotaPrivadaAdmin path='/admin/timeline' component={Timeline}/>
       <RotaPrivadaAdmin path='/admin/crudobjetivos' component={Objetivo}/>
       <RotaPrivadaAdmin path='/admin/crudturmas' component={CrudTurma}/>
