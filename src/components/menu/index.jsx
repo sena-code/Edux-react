@@ -64,11 +64,10 @@ const Menu = () => {
         } else {
             return (
                 <Nav>
-                    
-                    <NavDropdown title={jwt_decode(token).nameid} style={{color : 'white'}}  id="basic-nav-dropdown">
-                        
-                        <NavDropdown.Item onClick={ event => sair(event)} >Sair</NavDropdown.Item>
-                    </NavDropdown>
+                    <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
+                    <DropdownButton id="dropdown-basic-button" variant="danger" style={{paddingLeft : '15px'}} title={jwt_decode(token).nameid }>
+                    <Dropdown.Item onClick={ event => sair(event)} href="#/action-1">Sair</Dropdown.Item>
+                    </DropdownButton>
                 </Nav>
             )
         }

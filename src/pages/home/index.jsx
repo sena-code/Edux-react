@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel, Jumbotron, Button } from 'react-bootstrap';
 import Menu from '../../components/menu/index';
-import wallpaper from '../../assets/img/wallpaperedux.png';
+import wallpaper from '../../assets/img/5.jpg';
 import Rodape from '../../components/rodape/index'
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
         <Menu />
         <Carousel>
             <Carousel.Item>
-            <img src={wallpaper} alt="Edux Wallpaper" style={{height : '700px', width : '1600px'}} />
+            <img src={wallpaper} alt="Edux Wallpaper" style={{height : '400px', width : '1600px'}} />
             </Carousel.Item>
         </Carousel>
         <Jumbotron className="text-center">
