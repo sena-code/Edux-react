@@ -5,24 +5,24 @@ import Menu from '../../../components/menu/index';
 import Rodape from '../../../components/rodape/index';
 import Titulo from '../../../components/titulo/index';
 
-const CrudCurso = () => {
+const CrudDica = () => {
     const [id, setId] = useState(0);
-    const [titulo, setTitulo] = useState('');
-    const [idInstituicao, setIdInstituicao] = useState('');
-    const [ cursos, setCurso] = useState([]);
-    const [instituicao, setInstituicao] = useState([]);
+    const [texto, setTexto] = useState('');
+    const [idUsuario, setIdUsuario] = useState('');
+    const [urlimagem, setUrlImagem] = useState('');
+    const [ dicas, setDica] = useState([]);
     
     useEffect(() => {
-        listarCurso();
+        listarDica();
         
     }, [])
   
     
-     const listarCurso = () =>{
-        fetch(`${url}/Curso`)
+     const listarDica = () =>{
+        fetch(`${url}/Dica`)
         .then(response => response.json())
         .then(data => {
-            setCurso(data.data);
+            setDica(data.data);
             
             limparCampo();
         })
@@ -32,11 +32,12 @@ const CrudCurso = () => {
      //Metodo para limpar o campo do formulario após o professor ter salvo um curso
      const limparCampo = () =>{
             setId(0);
-            setTitulo('');
-            setIdInstituicao('');
+            setTexto('');
+            setIdUsuario('');
+            setUrlImagem('');
      }
      
-     //Metodo para excluir um curso
+     //Metodo para excluir uma dica
      const remover = (event) => {
         event.preventDefault();
 
@@ -48,27 +49,28 @@ const CrudCurso = () => {
         })
         .then(response => response.json())
         .then(data => {
-            alert('Curso excluido');
+            alert('Dica excluida');
 
-            listarCurso();
+            listarDica();
         })
      }
     
-     //Metodo para adicionar um curso
+     //Metodo para adicionar uma dica
      const adicionar = (event) =>{
         event.preventDefault();
 
-        const curso = {
-            titulo : titulo,
-            idInstituicao : idInstituicao
+        const dica = {
+            texto : texto,
+            idUsuario : idUsuario,
+            urliamgem : urlimagem
         }
 
         let method = (id === 0 ? 'POST' : 'PUT');
-        let urlRequest = (id === 0 ? `${url}/Curso` :  `${url}/Curso/${id}`);
+        let urlRequest = (id === 0 ? `${url}/Dica` :  `${url}/Dica/${id}`);
 
          fetch(urlRequest ,{
              method : method,
-             body : JSON.stringify(curso),
+             body : JSON.stringify(dica),
              headers : {
                 'content-type' : 'application/json',
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
@@ -76,17 +78,17 @@ const CrudCurso = () => {
          }) 
          .then(response => response.json())
          .then(dados => {
-             alert('Curso cadastrado');
+             alert('Dica cadastrada');
  
-             listarCurso();
+             listarDica();
          })
 
      }
-     //Metodo para editar um curso
+     //Metodo para editar uma dica
      const editar = (event) =>{
          event.preventDefault();
 
-         fetch(url + '/Curso/' + event.target.value, {
+         fetch(url + '/Dica/' + event.target.value, {
             method : 'GET',
             headers : {
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
@@ -95,15 +97,16 @@ const CrudCurso = () => {
         .then(response => response.json())
         .then(dado => {
             setId(dado.id);
-            setTitulo(dado.titulo);
-            setIdInstituicao(dado.idInstituicao);
+            setTexto(dado.titulo);
+            setIdUsuario(dado.idInstituicao);
+            setUrlImagem(dado.urlimagem);
         })
     }
      
       return(<div>
             
         <Menu />
-        <Titulo titulo="Cursos" chamada="Gerencie os cursos"/>
+        <Titulo titulo="Dicas" chamada="Gerencie suas dicas"/>
         <Container>
             
 
@@ -112,18 +115,18 @@ const CrudCurso = () => {
                     <Form onSubmit={event => adicionar(event)}>
                         
                         <Form.Group controlId="formTitulo">
-                            <Form.Label>Titulo</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={titulo} onChange={event => setTitulo(event.target.value)} />
+                            <Form.Label>Texto</Form.Label>
+                            <Form.Control as="textarea" rows={3} value={texto} onChange={event => setTexto(event.target.value)} />
                         </Form.Group>
                         
                         <Form.Group controlId="formInstituicao">
-                            <Form.Label>Instituição</Form.Label>
-                            <Form.Control as="select" value={idInstituicao} onChange={ event => setIdInstituicao(event.target.value)}>
+                            <Form.Label>Usuario</Form.Label>
+                            <Form.Control as="select" value={idUsuario} onChange={ event => setIdUsuario(event.target.value)}>
                                 <option value={0}>Selecione</option>
                                 {
-                                    instituicao.map((item, index) => {
+                                    dicas.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.id}>{item.nome}</option>
+                                            <option key={index} value={item.id}>{item.texto}</option>
                                         )
                                     })
                                 }
@@ -140,9 +143,9 @@ const CrudCurso = () => {
                         <thead>
                             <tr>
                                
-                                <th>Titulo</th>
+                                <th>Texto</th>
                                 
-                                <th>Instituição</th>
+                                <th>Usuario</th>
 
                                 
                                 <th>Ações</th>
@@ -150,14 +153,15 @@ const CrudCurso = () => {
                         </thead>
                         <tbody>
                             {
-                                cursos.map((item, index) => {
+                                dicas.map((item, index) => {
                                 return (
                                     <tr key={index}>
 
-                                        <td>{item.titulo}</td>
-                                <td>{item.idInstituicao =  instituicao.map((item, index) => {
+                                        <td>{item.id}</td>
+                                <td>{item.dicas =  dicas.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.idInstituicao}>{item.nome}</option>
+                                            <option key={index} value={item.dicas}>{item.texto}</option>
+                                            
                                         )
                                     })}</td>
                                       
@@ -180,4 +184,4 @@ const CrudCurso = () => {
     </div>)
   }
 
-  export default CrudCurso;
+  export default CrudDica;

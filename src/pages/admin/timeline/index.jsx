@@ -14,6 +14,7 @@ const Timeline = () => {
         const[Idcurso, setIdcurso] = useState('');
         const[cursos, setCursos] = useState([]);
         const[objetivoA, setObjetivoA] = useState([]);
+        const [instituicoes, setInstituicao] = useState([]);
         const[nota, setNota] = useState(0)
        
         useEffect(() => {
@@ -23,7 +24,26 @@ const Timeline = () => {
             listarCategoria();
             listarCursos();
             listarObjetivoA();
+            listarInstituicao();
         },[])
+
+        const listarInstituicao = () => {
+            fetch(`${url}/Instituicao`,{
+                headers : {
+                            
+                    'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            }
+                    
+               
+            })
+            .then(response => response.json())
+            .then(dados => {
+               
+                setInstituicao(dados.data);
+                console.log(dados.data);
+            })
+            .catch(err => console.error(err));
+        }
     
         const listarDicas = () => {
             fetch(`${url}/Dica`,{
@@ -271,6 +291,41 @@ const Timeline = () => {
             <p>Todas os cursos apareceram aqui.  </p>
             <p>Caso queira adicionar um novo curso</p>
             <Button href='/admin/crudcursos' variant="primary">Adicionar</Button>{' '}
+            
+        </Jumbotron>
+        <Container>
+            {
+                instituicoes.map((item, index) => {
+                    return(
+
+                        <Table key={index} striped bordered hover>
+                            <thead>
+                                <tr>
+                                
+                                <th>Instituicao</th>
+                                 
+                               
+                                </tr>
+                         </thead>
+                        <tbody >
+                        <tr >
+                        
+                    <td>{item.nome}</td>
+                
+                    
+                        
+                        </tr>
+                        </tbody>
+                        </Table>
+                    )
+                })
+            }
+            </Container>
+            <Jumbotron className="text-center">
+            <h1>Instituições</h1>
+            <p>Todas os cursos apareceram aqui.  </p>
+            <p>Caso queira adicionar um novo curso</p>
+            <Button href='/admin/crudinstituicao' variant="primary">Adicionar</Button>{' '}
             
         </Jumbotron>
         <Container>

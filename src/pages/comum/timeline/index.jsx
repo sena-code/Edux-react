@@ -4,6 +4,8 @@ import { Carousel, Jumbotron, Button, Card, Row, Col, Container, Table, Form } f
 import Menu from '../../../components/menu/index';
 import Rodape from '../../../components/rodape/index'
 
+
+
 const TimelineA = () => {
 
       const [id, setId] = useState(0);
@@ -16,12 +18,11 @@ const TimelineA = () => {
       
 
       useEffect(() => {
-        listarUsuario();
         listarPost();
     }, [])
 
-      const listarUsuario = () => {
-        fetch(`${url}/usuario`)
+     /* const listarUsuario = () => {
+        fetch(`${url}/Usuario`)
         .then(response => response.json())
         .then(dados => {
             setUsuario(dados);
@@ -29,10 +30,10 @@ const TimelineA = () => {
             limparCampo();
         })
         .catch(err => console.error(err));
-      }
+      }*/
 
       const listarPost = () => {
-        fetch(`${url}/post`, {
+        fetch(`${url}/Post`, {
             headers : {
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
             }
@@ -58,7 +59,7 @@ const TimelineA = () => {
 
         
         let method = (id === 0 ? 'POST' : 'PUT');
-        let urlRequest = (id === 0 ? `${url}/post` :  `${url}/post/${id}`);
+        let urlRequest = (id === 0 ? `${url}/Post` :  `${url}/Post/${id}`);
 
         fetch(urlRequest, {
             method : method,
@@ -85,7 +86,7 @@ const TimelineA = () => {
         let formdata = new FormData();
         formdata.append('arquivo', event.target.files[0]);
         
-        fetch(`${url}/upload`,
+        fetch(`${url}/Upload`,
         {
             method : 'POST',
             body : formdata,
@@ -136,8 +137,35 @@ const TimelineA = () => {
         <Jumbotron className="text-center" >
             <h1>Posts</h1>
         </Jumbotron>
-       
+
+        <Jumbotron className="text-center" >
+            <h1>Ranking</h1>
+            <Card>
+                    <Card.Body>
+                    <Table bordered>
+                        <thead>
+                            <tr>
+                               
+                                <th>#</th>
+                                
+                                <th>Usuario</th>
+
+                                <th>Conquistas ocultas</th>
+
+                                <th>Conquistas totais</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                    </Table>
+                    </Card.Body>
+                </Card>
+        </Jumbotron>
+        
         <Container>
+            
         <Row>
         {
                     post.map((item, index) => {
@@ -156,7 +184,6 @@ const TimelineA = () => {
                         )
                     })
                 }
-
 
             </Row>
         </Container>
