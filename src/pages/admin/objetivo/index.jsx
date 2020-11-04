@@ -180,7 +180,7 @@ const Objetivo = () => {
                                 <tr>
                                    
                                     <th>Descrição</th>
-                                    <th>Id Categoria</th>
+                                    <th>Categoria</th>
                                     <th>Ações</th>
                                     
                                 </tr>
@@ -192,7 +192,7 @@ const Objetivo = () => {
                                         <tr key={index}>
 
                                             <td>{item.descricao}</td>
-                                    <td>{item.idCategoria}</td>
+                                    <td>{item.categoria.tipo}</td>
                                   
                                            
                                                

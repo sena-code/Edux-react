@@ -35,7 +35,8 @@ const Menu = () => {
         } else if( jwt_decode(token).role === "Administrador"){
             return (
                 <Nav>
-                   <Button href="/admin/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
+                   <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
+                   <Button href="/admin/informacoes" style={{marginRight: '15px'}} variant="success"  >Informações</Button>
                     <DropdownButton id="dropdown-basic-button" variant="success" title="Cadastrar">
                     <Dropdown.Item href="/admin/crudcursos">Curso</Dropdown.Item>
                     <Dropdown.Divider />

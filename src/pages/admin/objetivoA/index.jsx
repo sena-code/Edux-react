@@ -15,12 +15,14 @@ const ObjetivoA = () => {
     const [objetivosA, setObjetivoA] = useState([]);
     const [alunoTurma, setAlunoTurmas] = useState([]);
     const [objetivo, setObjetivo] = useState([]);
+    const [Usuario, setUsuario] = useState([]);
 
 
     useEffect(() => {
         listarAlunoTurma();
         listarObjetivos();
         listarObjetivoAluno();
+        listarUsuario();
     },[]);
 
     const listarObjetivoAluno = () => {
@@ -33,6 +35,9 @@ const ObjetivoA = () => {
         .then(response => response.json())
         .then(dados => {
             setObjetivoA(dados.data);
+       
+            
+            console.log(dados.data);
         })
         .catch(err => console.error(err));
 
@@ -50,7 +55,29 @@ const ObjetivoA = () => {
         })
             .then(response => response.json())
             .then(dados => {
-                setAlunoTurmas(dados.data);
+                setAlunoTurmas(dados);
+               
+                
+                console.log(dados);
+            })
+            .catch(err => console.error(err));
+    }
+
+    const listarUsuario = () => {
+
+        fetch(`${url}/Usuario`, {
+            headers : {
+                        
+                        
+                            
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            
+        }
+        })
+            .then(response => response.json())
+            .then(dados => {
+              
+                setUsuario(dados);
                 
                 console.log(dados);
             })
@@ -70,6 +97,7 @@ const ObjetivoA = () => {
         .then(response => response.json())
         .then(dados => {
             setObjetivo(dados.data);
+            console.log(dados.data);
 
             limparCampos();
         })
@@ -213,9 +241,9 @@ const ObjetivoA = () => {
                                 <Form.Control as="select" size="lg" custom defaultValue={idAlunoTurma} onChange={event => setidAlunoTurma(event.target.value)} >
                                     <option value={0}>Selecione</option>
                                     {
-                                       objetivosA.map((item, index) => {
+                                       alunoTurma.map((item, index) => {
                                             return(
-                                                <option key={index} >{item.idAlunoTurma}</option>
+                                                <option key={index} value={item.id}>{item.usuario.nome}</option>
                                             )
                                         })
                                     }
@@ -240,7 +268,7 @@ const ObjetivoA = () => {
                                    
                                     <th>Nota</th>
                                     <th>Data Alcançada</th>
-                                    <th>Id Objetivo</th>
+                                    <th>Objetivo</th>
                                     <th>Id Aluno Turma</th>
                                     <th>Ações</th>
                                     
@@ -252,10 +280,16 @@ const ObjetivoA = () => {
                                     return (
                                         <tr key={index}>
 
-                                            <td>{item.nota}</td>
-                                            <td>{item.dataAlcancada}</td>
-                                    <td>{item.idObjetivo}</td>
+                                  
+
+                                    <td>{item.nota}</td>
+                                                    
+                                    <td>{item.dataAlcancada}</td>
+                                    <td>{item.objetivo.descricao}</td>
+                                    
                                     <td>{item.idAlunoTurma}</td>
+                                               
+                                       
                                   
                                            
                                                
@@ -264,7 +298,7 @@ const ObjetivoA = () => {
                                           
                                             <td>
                                                 <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>
-                                                <Button type="button" variant="danger" value={item.id} style={{ marginTop : '10px'}} onClick={ event => remover(event)}>Remover</Button>
+                                                <Button type="button" variant="danger" value={item.id} style={{ marginTop : 'auto', marginLeft : '35px'}} onClick={ event => remover(event)}>Remover</Button>
                                             </td>
                                         </tr>
                                     )

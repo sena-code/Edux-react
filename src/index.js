@@ -48,7 +48,12 @@ const routing = (
      <Route exact path='/' component={Home} />
       <Route path='/login' component={Login} />
       <RotaPrivada path='/comum/timeline' component={TimelineA}/>
+<<<<<<< HEAD
       <RotaPrivadaAdmin path='/admin/timeline' component={Timeline}/>
+=======
+ 
+      <RotaPrivadaAdmin path='/admin/informacoes' component={Timeline}/>
+>>>>>>> 37866f3b7494e6226ec45f5c709347a624b7510f
       <RotaPrivadaAdmin path='/admin/crudprofessores' component={CrudProfessor}/>
       <RotaPrivadaAdmin path='/admin/crudusuarios' component={Cadastro}/>
       <RotaPrivadaAdmin path='/admin/crudinstituicao' component={CrudInstituicao}/>

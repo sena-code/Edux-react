@@ -15,7 +15,9 @@ const Timeline = () => {
         const[cursos, setCursos] = useState([]);
         const[objetivoA, setObjetivoA] = useState([]);
         const [instituicoes, setInstituicao] = useState([]);
-        const[nota, setNota] = useState(0)
+        const[nota, setNota] = useState(0);
+        const[alunoTurma, setAlunoTurmas] = useState([]);
+
        
         useEffect(() => {
             listarDicas();
@@ -24,7 +26,9 @@ const Timeline = () => {
             listarCategoria();
             listarCursos();
             listarObjetivoA();
+            listarAlunoTurma();
             listarInstituicao();
+            
         },[])
 
         const listarInstituicao = () => {
@@ -45,6 +49,27 @@ const Timeline = () => {
             .catch(err => console.error(err));
         }
     
+        const listarAlunoTurma = () => {
+
+            fetch(`${url}/AlunoTurma`, {
+                headers : {
+                            
+                            
+                                
+                    'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+                
+            }
+            })
+                .then(response => response.json())
+                .then(dados => {
+                    setAlunoTurmas(dados);
+                   
+                    
+                    console.log(dados);
+                })
+                .catch(err => console.error(err));
+        }
+
         const listarDicas = () => {
             fetch(`${url}/Dica`,{
                 headers : {
@@ -155,8 +180,8 @@ const Timeline = () => {
             .then(response => response.json())
             .then(dados => {
                
-                setObjetivoA(dados.data);
-                setNota(dados.data);
+                setObjetivoA(dados);
+                setNota(dados);
                 console.log(dados.data);
             })
             .catch(err => console.error(err));
@@ -381,7 +406,13 @@ const Timeline = () => {
                          </thead>
                         <tbody >
                         <tr >
-                    <td>{item.idAlunoTurma}</td>
+                        {
+                                       alunoTurma.map((item, index) => {
+                                            return(
+                                                <td key={index} value={item.id}>{item.usuario.nome}</td>
+                                            )
+                                        })
+                                    }
                     <td>{item.nota}</td>
                     <td>{item.dataAlcancada}</td>
                     
