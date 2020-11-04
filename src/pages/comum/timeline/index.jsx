@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {url} from '../../../utils/constants'
 import { Carousel, Jumbotron, Button, Card, Row, Col, Container, Table, Form } from 'react-bootstrap';
 import Menu from '../../../components/menu/index';
-import Rodape from '../../../components/rodape/index'
+import Rodape from '../../../components/rodape/index';
+import jwt_decode from 'jwt-decode';
 
 const TimelineA = () => {
 
@@ -13,7 +14,9 @@ const TimelineA = () => {
       const [post, setPost] = useState([]);
       const [texto, setTexto] = useState('');
       const [Imagem, setImagem] = useState('');
+    
       
+        
 
       useEffect(() => {
         listarUsuario();
@@ -45,33 +48,31 @@ const TimelineA = () => {
         })
         .catch(err => console.error(err));
       }
+      const token = localStorage.getItem('token-edux');
+      
 
       const salvar = (event) => {
         event.preventDefault();
-
+     
         const posts = {
             texto : texto,
             idUsuario : idUsuario,
-            urlImagem : urlImagem,
-            Imagem : Imagem
+            urlImagem : urlImagem
         }
 
         
-        let method = (id === 0 ? 'POST' : 'PUT');
-        let urlRequest = (id === 0 ? `${url}/post` :  `${url}/post/${id}`);
-
-        fetch(urlRequest, {
-            method : method,
-            body : JSON.stringify(posts),
+        fetch(url + '/post', {
+            method : 'POST',
+            body : JSON.stringify(posts), 
             headers : {
-                'content-type' : 'application/json',
+                
                 'authorization' : 'Bearer ' + localStorage.getItem('token-nyous-tarde')
             }
         })
         .then(response => response.json())
         .then(dados => {
             alert('Post salvo');
-
+            console.log(dados)
             listarPost();
         })
         .catch(err => console.error(err))
@@ -95,6 +96,7 @@ const TimelineA = () => {
         })
         .then(response => response.json())
         .then(data =>{
+            console.log(data)
             setUrlImagem(data.url);
         })
         .catch(err => console.error(err))
@@ -103,9 +105,10 @@ const TimelineA = () => {
         setId(0);
         setTexto('');
         setIdUsuario('');
-        setImagem('');
+        setUrlImagem('');
     }
-      
+    
+    
         return (
             <div>
                 
@@ -114,23 +117,40 @@ const TimelineA = () => {
         
         <Menu />
         <Jumbotron className="text-center">
-                <h1>Timeline do Aluno</h1>
+                <h1>Timeline</h1>
                 
             
             </Jumbotron>
 
             <Container>
-                <Form onSubmit={event => salvar(event)}>
+
+                <Card>
+                    <Card.Body>
+         <Form onSubmit={event => salvar(event)}>
             <Form.Group controlId="formDescricao">
                             <Form.Label>Texto</Form.Label>
                             <Form.Control as="textarea" placeholder='Digite Aqui' rows={2} value={texto} onChange={event => setTexto(event.target.value)}   />
+                           
                         </Form.Group>
+                        <Form.Control as="select" size="lg" custom defaultValue={idUsuario} onChange={event => setIdUsuario(event.target.value)} >
+                                    <option value={0}>Selecione</option>
+                                    {
+                                       usuario.map((item, index) => {
+                                            return(
+                                                <option key={index} value={item.id}>{item.nome}</option>
+                                            )
+                                        })
+                                    }
+                                    
+                                </Form.Control>
                         <Form.Group controlId="formNome">
-                                <Form.File id="fileCategoria" label="Imagem do Post" onChange={event => uploadFile(event)} />
+                                <Form.File id="fileCategoria" label="Imagem do Post"  onChange={event => uploadFile(event)} />
                                 { urlImagem && <img src={urlImagem} style={{ width : '160px'}} />}
                             </Form.Group>
                             <Button type="submit" style={{marginBottom : '15px'}}>Postar</Button>
                             </Form>
+                            </Card.Body>
+                            </Card>
             </Container>
 
         <Jumbotron className="text-center" >
@@ -142,13 +162,15 @@ const TimelineA = () => {
         {
                     post.map((item, index) => {
                         return (
-                            <Col key={index} style={{alignItems : 'center', paddingTop : '25px'}} xs=''>
+                            <Col key={index} style={{alignItems : 'center', paddingTop : '25px'}} xs='5'>
                                 <Card>
                                 <Card.Body>
-                                    <Card.Title style={{textAlign : 'center'}}>{item.texto}</Card.Title>
+                                    <Card.Title style={{textAlign : 'left'}}>{item.usuario.nome}</Card.Title>
+                        <Card.Text>{item.texto}</Card.Text>
+                        
                                     
                                     </Card.Body>
-                                    <Card.Img variant="top" src={item.urlImagem}/>
+                                    <Card.Img variant="top" src={urlImagem}/>
                                     
                                   
                                 </Card>

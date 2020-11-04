@@ -51,7 +51,7 @@ const Login = () => {
             console.log(usuario);
 
             if(usuario.role == 'Administrador'){
-                history.push('/admin/timeline');
+                history.push('/admin/informacoes');
             }else if(usuario.role == 'Comum'){
             history.push("/comum/timeline")
             }

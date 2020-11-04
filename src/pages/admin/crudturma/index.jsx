@@ -155,7 +155,7 @@ const CrudTurma = () => {
                             <tr>
                                
                                 <th>Descrição</th>
-                                
+                                <th>Curso</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -166,6 +166,7 @@ const CrudTurma = () => {
                                     <tr key={index}>
 
                                         <td>{item.descricao}</td>
+                                <td>{item.curso.titulo}</td>
                                       
                                         <td>
                                             <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>

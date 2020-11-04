@@ -33,7 +33,7 @@ const CrudProfessor = () => {
         fetch(`${url}/ProfessorTurma`)
         .then(response => response.json())
         .then(dados => {
-            setProfessorTurma(dados.data);
+            setProfessorTurma(dados);
             
             limparCampo();
         })

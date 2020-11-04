@@ -46,7 +46,7 @@ const routing = (
       <Route path='/login' component={Login} />
       <RotaPrivada path='/comum/timeline' component={TimelineA}/>
  
-      <RotaPrivadaAdmin path='/admin/timeline' component={Timeline}/>
+      <RotaPrivadaAdmin path='/admin/informacoes' component={Timeline}/>
       <RotaPrivadaAdmin path='/admin/crudprofessores' component={CrudProfessor}/>
       <RotaPrivadaAdmin path='/admin/crudusuarios' component={Cadastro}/>
       <RotaPrivadaAdmin path='/admin/crudobjetivos' component={Objetivo}/>
