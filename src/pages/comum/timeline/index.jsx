@@ -16,9 +16,7 @@ const TimelineA = () => {
       const [post, setPost] = useState([]);
       const [texto, setTexto] = useState('');
       const [Imagem, setImagem] = useState('');
-
-    
-    
+      const [curtida, setCurtida] = React.useState(0);
       const token = localStorage.getItem('token-edux');
      
 
@@ -117,7 +115,11 @@ const TimelineA = () => {
         setIdUsuario('');
         setUrlImagem('');
     }
-    
+
+     function Curtida () {
+         setCurtida (anterior => anterior + 1)
+     }
+      
     
         return (
             <div>
@@ -165,6 +167,10 @@ const TimelineA = () => {
 
         <Jumbotron className="text-center" >
             <h1>Posts</h1>
+            <div>
+           <h3>{curtida} Curtidas</h3>
+           <button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</button>
+        </div>
         </Jumbotron>
         <Container>
             
@@ -192,7 +198,38 @@ const TimelineA = () => {
                 </Row>
             </Container>
 
+<<<<<<< HEAD
         
+=======
+        <Jumbotron className="text-center" >
+            <h1>Ranking</h1>
+            <Card>
+                    <Card.Body>
+                    <Table bordered>
+                        <thead>
+                            <tr>
+                               
+                                <th>#</th>
+                                
+                                <th>Usuario</th>
+
+                                <th>Conquistas ocultas</th>
+
+                                <th>Conquistas totais</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                    </Table>
+
+                    </Card.Body>
+                </Card>
+
+        </Jumbotron>
+
+>>>>>>> 21c841ef0946dd63ea134075c7e825ee8da5a8db
         
        
         
