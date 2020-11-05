@@ -11,20 +11,37 @@ const CrudDica = () => {
     const [idUsuario, setIdUsuario] = useState('');
     const [urlimagem, setUrlImagem] = useState('');
     const [ dicas, setDica] = useState([]);
+    const [ usuario, setUsuario] = useState([]);
+    const [imagem, setImagem] = useState('');
     
     useEffect(() => {
         listarDica();
-        
+        listarUsuario();
     }, [])
   
     
      const listarDica = () =>{
-        fetch(`${url}/Dica`)
+        fetch(`${url}/Dica`, {
+            headers : {
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            }
+        })
         .then(response => response.json())
         .then(data => {
             setDica(data.data);
             
             limparCampo();
+        })
+        .catch(err => console.error(err));
+     }
+     const listarUsuario = () =>{
+        fetch(`${url}/usuario`
+        )
+        .then(response => response.json())
+        .then(data => {
+            setUsuario(data);
+            
+           
         })
         .catch(err => console.error(err));
      }
@@ -41,7 +58,7 @@ const CrudDica = () => {
      const remover = (event) => {
         event.preventDefault();
 
-        fetch(url + '/Curso/' + event.target.value,{
+        fetch(url + '/Dica/' + event.target.value,{
             method : 'DELETE',
             headers : {
                 'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
@@ -62,12 +79,12 @@ const CrudDica = () => {
         const dica = {
             texto : texto,
             idUsuario : idUsuario,
-            urliamgem : urlimagem
+            urlimagem : urlimagem
         }
 
         let method = (id === 0 ? 'POST' : 'PUT');
         let urlRequest = (id === 0 ? `${url}/Dica` :  `${url}/Dica/${id}`);
-
+        
          fetch(urlRequest ,{
              method : method,
              body : JSON.stringify(dica),
@@ -79,6 +96,7 @@ const CrudDica = () => {
          .then(response => response.json())
          .then(dados => {
              alert('Dica cadastrada');
+             console.log(dados)
  
              listarDica();
          })
@@ -102,6 +120,30 @@ const CrudDica = () => {
             setUrlImagem(dado.urlimagem);
         })
     }
+
+    const uploadFile = (event) => {
+        event.preventDefault()
+
+        console.log(event);
+        //crio o formulário para envio do arquivo
+        let formdata = new FormData();
+        formdata.append('arquivo', event.target.files[0]);
+        
+        fetch(`${url}/Upload`,
+        {
+            method : 'POST',
+            body : formdata,
+            headers : {
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            }
+        })
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data)
+            setUrlImagem(data.url);
+        })
+        .catch(err => console.error(err))
+    }
      
       return(<div>
             
@@ -124,14 +166,18 @@ const CrudDica = () => {
                             <Form.Control as="select" value={idUsuario} onChange={ event => setIdUsuario(event.target.value)}>
                                 <option value={0}>Selecione</option>
                                 {
-                                    dicas.map((item, index) => {
+                                    usuario.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.id}>{item.texto}</option>
+                                            <option key={index} value={item.id}>{item.nome}</option>
                                         )
                                     })
                                 }
                             </Form.Control>
                         </Form.Group>
+
+
+                        <Form.File id="fileCategoria" label="Imagem do Post"  onChange={event => uploadFile(event)} />
+                                { urlimagem && <img src={urlimagem} style={{ width : '160px'}} />}
 
                         <Button type="submit" >Adicionar</Button>
                     </Form>
@@ -142,12 +188,13 @@ const CrudDica = () => {
                     <Table bordered>
                         <thead>
                             <tr>
-                               
+                            <th>Usuario</th>
+
                                 <th>Texto</th>
                                 
-                                <th>Usuario</th>
-
                                 
+
+                                <th>Imagem</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -157,13 +204,10 @@ const CrudDica = () => {
                                 return (
                                     <tr key={index}>
 
-                                        <td>{item.id}</td>
-                                <td>{item.dicas =  dicas.map((item, index) => {
-                                        return (
-                                            <option key={index} value={item.dicas}>{item.texto}</option>
-                                            
-                                        )
-                                    })}</td>
+                                <td>{item.usuario.nome}</td>
+                                <td>{item.texto}</td>
+                                    <td><img src={item.urlImagem} style={{width : '225px', allignItem : 'center'}}/></td>
+                                
                                       
                                         <td>
                                             <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>

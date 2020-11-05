@@ -180,7 +180,7 @@ const Timeline = () => {
             .then(response => response.json())
             .then(dados => {
                
-                setObjetivoA(dados);
+                setObjetivoA(dados.data);
                 setNota(dados);
                 console.log(dados.data);
             })
@@ -406,13 +406,7 @@ const Timeline = () => {
                          </thead>
                         <tbody >
                         <tr >
-                        {
-                                       alunoTurma.map((item, index) => {
-                                            return(
-                                                <td key={index} value={item.id}>{item.usuario.nome}</td>
-                                            )
-                                        })
-                                    }
+                    <td>{item.idAlunoTurma}</td>
                     <td>{item.nota}</td>
                     <td>{item.dataAlcancada}</td>
                     
