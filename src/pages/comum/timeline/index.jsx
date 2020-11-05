@@ -192,32 +192,7 @@ const TimelineA = () => {
                 </Row>
             </Container>
 
-        <Jumbotron className="text-center" >
-            <h1>Ranking</h1>
-            <Card>
-                    <Card.Body>
-                    <Table bordered>
-                        <thead>
-                            <tr>
-                               
-                                <th>#</th>
-                                
-                                <th>Usuario</th>
-
-                                <th>Conquistas ocultas</th>
-
-                                <th>Conquistas totais</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                        </tbody>
-                    </Table>
-                    </Card.Body>
-                </Card>
-
-        </Jumbotron>
+        
         
        
         
