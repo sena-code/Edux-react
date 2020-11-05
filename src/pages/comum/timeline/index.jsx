@@ -16,9 +16,11 @@ const TimelineA = () => {
       const [post, setPost] = useState([]);
       const [texto, setTexto] = useState('');
       const [Imagem, setImagem] = useState('');
+
     
-      
-        
+    
+      const token = localStorage.getItem('token-edux');
+     
 
       useEffect(() => {
         listarPost();
@@ -45,17 +47,19 @@ const TimelineA = () => {
         .then(response => response.json())
         .then(dados => {
             setPost(dados.data);
+            console.log(dados.data);
             
             limparCampo();
         })
         .catch(err => console.error(err));
       }
-      const token = localStorage.getItem('token-edux');
       
 
       const salvar = (event) => {
         event.preventDefault();
-     
+
+      
+      
         const posts = {
             texto : texto,
             idUsuario : idUsuario,
@@ -66,12 +70,12 @@ const TimelineA = () => {
         let method = (id === 0 ? 'POST' : 'PUT');
         let urlRequest = (id === 0 ? `${url}/Post` :  `${url}/Post/${id}`);
 
-        fetch(url + '/Post', {
-            method : 'POST',
+        fetch(urlRequest, {
+            method : method,
             body : JSON.stringify(posts), 
             headers : {
-                
-                'authorization' : 'Bearer ' + localStorage.getItem('token-nyous-tarde')
+                'content-type' : 'application/json',
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
         .then(response => response.json())
@@ -139,14 +143,14 @@ const TimelineA = () => {
                            
                         </Form.Group>
                         <Form.Control as="select" size="lg" custom defaultValue={idUsuario} onChange={event => setIdUsuario(event.target.value)} >
-                                    <option value={0}>Selecione</option>
-                                    {
-                                       usuario.map((item, index) => {
-                                            return(
-                                                <option key={index} value={item.id}>{item.nome}</option>
-                                            )
-                                        })
-                                    }
+                        <option value={0}>Selecione</option>
+                                {
+                                    usuario.map((item, index) => {
+                                        return (
+                                            <option key={index} value={item.id}>{item.nome}</option>
+                                        )
+                                    })
+                                }
                                     
                                 </Form.Control>
                         <Form.Group controlId="formNome">
@@ -162,6 +166,31 @@ const TimelineA = () => {
         <Jumbotron className="text-center" >
             <h1>Posts</h1>
         </Jumbotron>
+        <Container>
+            
+            <Row>
+            {
+                        post.map((item, index) => {
+                            return (
+                                <Col key={index} style={{alignItems : 'center', paddingTop : '25px', paddingBottom : '55px'}} xs='8'>
+                                    <Card>
+                                    <Card.Body>
+                                        <Card.Title style={{textAlign : 'left'}}>{item.usuario.nome}</Card.Title>
+                            <Card.Text>{item.texto}</Card.Text>
+                            
+                                        
+                                        </Card.Body>
+                                        <Card.Img variant="top" src={item.urlImagem}/>
+                                        
+                                      
+                                    </Card>
+                                </Col>
+                            )
+                        })
+                    }
+    
+                </Row>
+            </Container>
 
         <Jumbotron className="text-center" >
             <h1>Ranking</h1>
@@ -187,33 +216,10 @@ const TimelineA = () => {
                     </Table>
                     </Card.Body>
                 </Card>
+
         </Jumbotron>
         
-        <Container>
-            
-        <Row>
-        {
-                    post.map((item, index) => {
-                        return (
-                            <Col key={index} style={{alignItems : 'center', paddingTop : '25px'}} xs='5'>
-                                <Card>
-                                <Card.Body>
-                                    <Card.Title style={{textAlign : 'left'}}>{item.usuario.nome}</Card.Title>
-                        <Card.Text>{item.texto}</Card.Text>
-                        
-                                    
-                                    </Card.Body>
-                                    <Card.Img variant="top" src={urlImagem}/>
-                                    
-                                  
-                                </Card>
-                            </Col>
-                        )
-                    })
-                }
-
-            </Row>
-        </Container>
+       
         
       
 
