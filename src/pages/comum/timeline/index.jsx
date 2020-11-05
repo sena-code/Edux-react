@@ -16,7 +16,7 @@ const TimelineA = () => {
       const [post, setPost] = useState([]);
       const [texto, setTexto] = useState('');
       const [Imagem, setImagem] = useState('');
-    
+      const [curtida, setCurtida] = React.useState(0);
       
         
 
@@ -113,7 +113,11 @@ const TimelineA = () => {
         setIdUsuario('');
         setUrlImagem('');
     }
-    
+
+     function Curtida () {
+         setCurtida (anterior => anterior + 1)
+     }
+      
     
         return (
             <div>
@@ -161,6 +165,10 @@ const TimelineA = () => {
 
         <Jumbotron className="text-center" >
             <h1>Posts</h1>
+            <div>
+           <h3>{curtida} Curtidas</h3>
+           <button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</button>
+        </div>
         </Jumbotron>
 
         <Jumbotron className="text-center" >
@@ -185,9 +193,11 @@ const TimelineA = () => {
                            
                         </tbody>
                     </Table>
+
                     </Card.Body>
                 </Card>
         </Jumbotron>
+
         
         <Container>
             
