@@ -36,6 +36,7 @@ const Menu = () => {
             return (
                 <Nav>
                    <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
+                   <Button href="/comum/rank" style={{marginRight: '15px'}} variant="success"  >Ranking</Button>
                    <Button href="/admin/informacoes" style={{marginRight: '15px'}} variant="success"  >Informações</Button>
                     <DropdownButton id="dropdown-basic-button" variant="success" title="Cadastrar">
                     <Dropdown.Item href="/admin/crudcursos">Curso</Dropdown.Item>
@@ -68,6 +69,7 @@ const Menu = () => {
             return (
                 <Nav>
                     <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
+                    <Button href="/comum/rank" style={{marginRight: '15px'}} variant="success"  >Ranking</Button>
                     <DropdownButton id="dropdown-basic-button" variant="danger" style={{paddingLeft : '15px'}} title={jwt_decode(token).nameid }>
                     <Dropdown.Item onClick={ event => sair(event)} href="#/action-1">Sair</Dropdown.Item>
                     </DropdownButton>

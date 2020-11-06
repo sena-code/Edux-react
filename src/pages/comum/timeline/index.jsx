@@ -184,49 +184,22 @@ const TimelineA = () => {
                                     <Card>
                                     <Card.Body>
                                         <Card.Title style={{textAlign : 'left'}}>{item.usuario.nome}</Card.Title>
-                            <Card.Text>{item.texto}</Card.Text>
+                            <Card.Text>{item.texto} </Card.Text>
                             
                                         
                                         </Card.Body>
                                         <Card.Img variant="top" src={item.urlImagem}/>
                                         
-                                      
+                                        <p style={{textAlign : 'center'}}>{curtida} Curtidas</p>
+           <button onClick={Curtida} style ={{ background:'green', color:'white', height : '35px'}} >Curtir</button>
                                     </Card>
                                 </Col>
                             )
                         })
                     }
-    
+                    
                 </Row>
             </Container>
-
-        <Jumbotron className="text-center" >
-            <h1>Ranking</h1>
-            <Card>
-                    <Card.Body>
-                    <Table bordered>
-                        <thead>
-                            <tr>
-                               
-                                <th>#</th>
-                                
-                                <th>Usuario</th>
-
-                                <th>Conquistas ocultas</th>
-
-                                <th>Conquistas totais</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                        </tbody>
-                    </Table>
-
-                    </Card.Body>
-                </Card>
-
-        </Jumbotron>
 
         
        
