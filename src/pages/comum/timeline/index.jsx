@@ -47,6 +47,11 @@ const TimelineA = () => {
             setPost(dados.data);
             console.log(dados.data);
             
+           <div>
+           <h3>{curtida} Curtidas</h3>
+           <button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</button>
+           </div>
+               
             limparCampo();
         })
         .catch(err => console.error(err));
@@ -167,10 +172,7 @@ const TimelineA = () => {
 
         <Jumbotron className="text-center" >
             <h1>Posts</h1>
-            <div>
-           <h3>{curtida} Curtidas</h3>
-           <button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</button>
-        </div>
+           
         </Jumbotron>
         <Container>
             

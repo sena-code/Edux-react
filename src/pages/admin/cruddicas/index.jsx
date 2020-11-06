@@ -156,7 +156,7 @@ const CrudDica = () => {
                     <Card.Body>
                     <Form onSubmit={event => adicionar(event)}>
                         
-                        <Form.Group controlId="formTitulo">
+                        <Form.Group controlId="formTexto">
                             <Form.Label>Texto</Form.Label>
                             <Form.Control as="textarea" rows={3} value={texto} onChange={event => setTexto(event.target.value)} />
                         </Form.Group>
