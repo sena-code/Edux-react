@@ -398,7 +398,7 @@ const Timeline = () => {
                             <thead>
                                 <tr>
                                 
-                                <th>Id Aluno Turma</th>
+                                <th>Id Aluno </th>
                                 <th>Nota</th>
                                 <th>Data Alcançada</th>
                                
@@ -406,7 +406,7 @@ const Timeline = () => {
                          </thead>
                         <tbody >
                         <tr >
-                    <td>{item.idAlunoTurma}</td>
+                    <td>{item.idUsuario}</td>
                     <td>{item.nota}</td>
                     <td>{item.dataAlcancada}</td>
                     

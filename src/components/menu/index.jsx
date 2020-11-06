@@ -41,8 +41,7 @@ const Menu = () => {
                     <DropdownButton id="dropdown-basic-button" variant="success" title="Cadastrar">
                     <Dropdown.Item href="/admin/crudcursos">Curso</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item href="/admin/cruinstituicao">Instituicao</Dropdown.Item>
-                    <Dropdown.Divider />
+                    
                     <Dropdown.Item href="/admin/cruddicas">Dica</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudobjetivos">Objetivo</Dropdown.Item>
@@ -54,8 +53,8 @@ const Menu = () => {
                     <Dropdown.Item href="/admin/crudturmas">Turma</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudusuarios">Usuário</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item href="/admin/curtidas">Curtida</Dropdown.Item>
+                   
+                  
                     </DropdownButton>
                     <DropdownButton id="dropdown-basic-button" variant="danger" style={{paddingLeft : '15px'}} title={jwt_decode(token).nameid }>
                     <Dropdown.Item onClick={ event => sair(event)} href="#/action-1">Sair</Dropdown.Item>

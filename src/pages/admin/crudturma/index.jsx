@@ -289,6 +289,7 @@ const CrudTurma = () => {
                 </Card>
         </Container>
 
+        <Titulo titulo="Aluno em turma" chamada="Adicione, remova ou edite o aluno em uma turma."/>
         <Container>
             
 

@@ -132,7 +132,7 @@ const CrudProfessor = () => {
       return(<div>
             
         <Menu />
-        <Titulo titulo="Turmas" chamada="Gerencie turmas"/>
+        <Titulo titulo="Adicione professores a turmas" chamada="Gerencie professores "/>
         <Container>
             
 
