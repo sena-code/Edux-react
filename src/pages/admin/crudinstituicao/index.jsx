@@ -135,49 +135,50 @@ const CrudInstituicao = () => {
         <Container>
             
 
-            <Card>
+               
+            <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px' }} >
                     <Card.Body>
                     <Form onSubmit={event => adicionar(event)}>
                         
                         <Form.Group controlId="formNome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={nome} onChange={event => setNome(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={nome} onChange={event => setNome(event.target.value)} />
                         </Form.Group>
 
                         <Form.Group controlId="formLogradouro">
                             <Form.Label>Logradouro</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={logradouro} onChange={event => setLogradouro(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={logradouro} onChange={event => setLogradouro(event.target.value)} />
                         </Form.Group>
 
                         <Form.Group controlId="formNome">
                             <Form.Label>Numero</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={numero} onChange={event => setNumero(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={numero} onChange={event => setNumero(event.target.value)} />
                         </Form.Group>
                         
                         
                         <Form.Group controlId="formNome">
                             <Form.Label>Complemento</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={complemento} onChange={event => setComplemento(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={complemento} onChange={event => setComplemento(event.target.value)} />
                         </Form.Group>
                         
                         <Form.Group controlId="formNome">
                             <Form.Label>Bairro</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={bairro} onChange={event => setBairro(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={bairro} onChange={event => setBairro(event.target.value)} />
                         </Form.Group>
                         
                         <Form.Group controlId="formNome">
                             <Form.Label>Cidade</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={cidade} onChange={event => setCidade(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={cidade} onChange={event => setCidade(event.target.value)} />
                         </Form.Group>
                         
                         <Form.Group controlId="formNome">
                             <Form.Label>CEP</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={cep} onChange={event => setCep(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={cep} onChange={event => setCep(event.target.value)} />
                         </Form.Group>
                         
                         <Form.Group controlId="formNome">
                             <Form.Label>UF</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={uf} onChange={event => setUf(event.target.value)} />
+                            <Form.Control as="textarea" rows={1} value={uf} onChange={event => setUf(event.target.value)} />
                         </Form.Group>
                        
 
@@ -185,9 +186,9 @@ const CrudInstituicao = () => {
                     </Form>
                     </Card.Body>
                 </Card>
-                <Card>
+                <Card >
                     <Card.Body>
-                    <Table bordered>
+                    <Table  variant='dark' bordered>
                         <thead>
                             <tr>
                                

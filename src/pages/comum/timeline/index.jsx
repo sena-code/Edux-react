@@ -81,6 +81,9 @@ const TimelineA = () => {
         .then(dados => {
             alert('Post salvo');
             console.log(dados)
+          
+       
+         
             listarPost();
         })
         .catch(err => console.error(err))
@@ -137,7 +140,7 @@ const TimelineA = () => {
 
             <Container>
 
-                <Card>
+                <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px'}}>
                     <Card.Body>
          <Form onSubmit={event => salvar(event)}>
             <Form.Group controlId="formDescricao">
@@ -149,9 +152,14 @@ const TimelineA = () => {
                         <option value={0}>Selecione</option>
                                 {
                                     usuario.map((item, index) => {
-                                        return (
-                                            <option key={index} value={item.id}>{item.nome}</option>
+                                       
+                                   
+                                    
+                                        return(
+                                        <option value={item.id}>{item.nome}</option>
                                         )
+                                    
+                                        
                                     })
                                 }
                                     
@@ -177,8 +185,8 @@ const TimelineA = () => {
             {
                         post.map((item, index) => {
                             return (
-                                <Col     key={index} style={{alignItems : 'center', paddingTop : '25px', paddingBottom : '55px'}} xs='8'>
-                                    <Card bg='dark' text='white'>
+                                <Col     key={index} style={{paddingTop : '25px', paddingBottom : '55px'}} xs='10'>
+                                    <Card style={{backgroundColor : '#1d1d1d', alignItens : 'center'}} text='white'>
                                     <Card.Body>
                                         <Card.Title style={{textAlign : 'left'}}>{item.usuario.nome}</Card.Title>
                                         <Card.Text>{item.texto} </Card.Text>

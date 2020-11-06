@@ -65,7 +65,7 @@ const CrudTurma = () => {
         .then(response => response.json())
         .then(dados => {
             alert('Turma excluida');
-
+         
             listarTurma();
         })
      }
@@ -228,7 +228,7 @@ const CrudTurma = () => {
         <Container>
             
 
-            <Card>
+            <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px'}} >
                     <Card.Body>
                     <Form onSubmit={event => salvar(event)}>
                         
@@ -255,9 +255,9 @@ const CrudTurma = () => {
                     </Form>
                     </Card.Body>
                 </Card>
-                <Card>
+                <Card style={{marginBottom : '30px'}}>
                     <Card.Body>
-                    <Table bordered>
+                    <Table  variant='dark' bordered>
                         <thead>
                             <tr>
                                
@@ -276,8 +276,8 @@ const CrudTurma = () => {
                                 <td>{item.curso.titulo}</td>
                                       
                                         <td>
-                                            <Button type="button" variant="warning" value={item.id} onClick={ event => editar2(event)}>Editar</Button>
-                                            <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '10px'}} onClick={ event => remover2(event)}>Remover</Button>
+                                            <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>
+                                            <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '10px'}} onClick={ event => remover(event)}>Remover</Button>
                                         </td>
                                     </tr>
                                 )
@@ -293,7 +293,7 @@ const CrudTurma = () => {
         <Container>
             
 
-            <Card>
+            <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px' }} >
                     <Card.Body>
                     <Form onSubmit={event => salvar2(event)}>
                         
@@ -337,7 +337,7 @@ const CrudTurma = () => {
                 </Card>
                 <Card>
                     <Card.Body>
-                    <Table bordered>
+                    <Table variant='dark' bordered>
                         <thead>
                             <tr>
                                
@@ -357,8 +357,8 @@ const CrudTurma = () => {
                                 <td>{item.matricula }</td>
                                       
                                         <td>
-                                            <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>
-                                            <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '10px'}} onClick={ event => remover(event)}>Remover</Button>
+                                            <Button type="button" variant="warning" value={item.id} onClick={ event => editar2(event)}>Editar</Button>
+                                            <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '10px'}} onClick={ event => remover2(event)}>Remover</Button>
                                         </td>
                                     </tr>
                                 )

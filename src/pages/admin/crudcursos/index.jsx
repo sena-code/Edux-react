@@ -14,6 +14,7 @@ const CrudCurso = () => {
     
     useEffect(() => {
         listarCurso();
+        listarInstituicao();
         
     }, [])
   
@@ -23,6 +24,21 @@ const CrudCurso = () => {
         .then(response => response.json())
         .then(data => {
             setCurso(data.data);
+            
+            limparCampo();
+        })
+        .catch(err => console.error(err));
+     }
+
+     const listarInstituicao = () =>{
+        fetch(`${url}/Instituicao`, {
+            headers : {
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setInstituicao(data.data);
             
             limparCampo();
         })
@@ -107,7 +123,7 @@ const CrudCurso = () => {
         <Container>
             
 
-            <Card>
+            <Card style={{backgroundColor : '#1d1d1d' , color : 'white'}} >
                     <Card.Body>
                     <Form onSubmit={event => adicionar(event)}>
                         
@@ -134,9 +150,9 @@ const CrudCurso = () => {
                     </Form>
                     </Card.Body>
                 </Card>
-                <Card>
+                <Card style={{marginTop : '25px'}} >
                     <Card.Body>
-                    <Table bordered>
+                    <Table variant='dark' bordered>
                         <thead>
                             <tr>
                                

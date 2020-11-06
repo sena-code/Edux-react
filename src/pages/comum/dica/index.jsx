@@ -52,7 +52,7 @@ const DicaComum = () => {
                         if(item.idUsuario == usuario.idUsuario){
                         return (
                             <Col key={index} xs='4'>
-                                <Card>
+                                <Card bg='dark' text='white'>
                                     <Card.Img variant="top" src={item.urlImagem}/>
                                     <Card.Body>
                                     <Card.Text style={{textAlign : 'center'}}>{item.texto}</Card.Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Dropdown, DropdownButton, Button } from 'react-bootstrap';
 import jwt_decode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
-import logo from '../../assets/img/logo_2.png';
+import logo from '../../assets/img/logo_branco_2-8.png';
 
 
 
@@ -34,7 +34,7 @@ const Menu = () => {
             );
         } else if( jwt_decode(token).role === "Administrador"){
             return (
-                <Nav>
+                <Nav >
                    <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
                    <Button href="/comum/rank" style={{marginRight: '15px'}} variant="success"  >Ranking</Button>
                    <Button href="/admin/informacoes" style={{marginRight: '15px'}} variant="success"  >Informações</Button>
@@ -53,6 +53,8 @@ const Menu = () => {
                     <Dropdown.Item href="/admin/crudturmas">Turma</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudusuarios">Usuário</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="/admin/crudinstituicao">Instituição</Dropdown.Item>
                    
                   
                     </DropdownButton>
@@ -80,7 +82,7 @@ const Menu = () => {
         }
     }
     return (
-        <Navbar bg="dark" expand="lg">
+        <Navbar style={{backgroundColor : '#1b1b1b'}}  expand="lg">
             <Navbar.Brand href="/"></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

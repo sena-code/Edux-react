@@ -192,7 +192,7 @@ const ObjetivoA = () => {
             <Container>
                 
 
-                <Card>
+                <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px'}} >
                         <Card.Body>
                         <Form onSubmit={event => salvar(event)}>
                            
@@ -262,7 +262,7 @@ const ObjetivoA = () => {
                     </Card>
                     <Card>
                         <Card.Body>
-                        <Table bordered>
+                        <Table variant='dark' bordered>
                             <thead>
                                 <tr>
                                    

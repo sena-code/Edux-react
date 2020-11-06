@@ -152,7 +152,7 @@ const CrudDica = () => {
         <Container>
             
 
-            <Card>
+            <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px'}}  >
                     <Card.Body>
                     <Form onSubmit={event => adicionar(event)}>
                         
@@ -179,13 +179,13 @@ const CrudDica = () => {
                         <Form.File id="fileCategoria" label="Imagem do Post"  onChange={event => uploadFile(event)} />
                                 { urlimagem && <img src={urlimagem} style={{ width : '160px'}} />}
 
-                        <Button type="submit" >Adicionar</Button>
+                        <Button style={{marginTop : '25px'}} type="submit" >Adicionar</Button>
                     </Form>
                     </Card.Body>
                 </Card>
                 <Card>
                     <Card.Body>
-                    <Table bordered>
+                    <Table variant='dark' bordered>
                         <thead>
                             <tr>
                             <th>Usuario</th>
