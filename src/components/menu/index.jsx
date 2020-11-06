@@ -69,6 +69,9 @@ const Menu = () => {
             return (
                 <Nav>
                     <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
+                    <Button href="/comum/objetivo" style={{marginRight: '15px'}} variant="success"  >Objetivos</Button>
+                    <Button href="/comum/objetivoA" style={{marginRight: '15px'}} variant="success"  >Seus Objetivos</Button>
+                    <Button href="/comum/dica" style={{marginRight: '15px'}} variant="success"  >Suas Dicas</Button>
                     <Button href="/comum/rank" style={{marginRight: '15px'}} variant="success"  >Ranking</Button>
                     <DropdownButton id="dropdown-basic-button" variant="danger" style={{paddingLeft : '15px'}} title={jwt_decode(token).nameid }>
                     <Dropdown.Item onClick={ event => sair(event)} href="#/action-1">Sair</Dropdown.Item>

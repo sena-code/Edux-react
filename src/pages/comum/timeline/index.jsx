@@ -7,6 +7,7 @@ import jwt_decode from 'jwt-decode';
 
 
 
+
 const TimelineA = () => {
 
       const [id, setId] = useState(0);
@@ -167,29 +168,26 @@ const TimelineA = () => {
 
         <Jumbotron className="text-center" >
             <h1>Posts</h1>
-            <div>
-           <h3>{curtida} Curtidas</h3>
-           <button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</button>
-        </div>
+           
+          
         </Jumbotron>
         <Container>
             
-            <Row>
+            <Row >
             {
                         post.map((item, index) => {
                             return (
-                                <Col key={index} style={{alignItems : 'center', paddingTop : '25px', paddingBottom : '55px'}} xs='8'>
-                                    <Card>
+                                <Col     key={index} style={{alignItems : 'center', paddingTop : '25px', paddingBottom : '55px'}} xs='8'>
+                                    <Card bg='dark' text='white'>
                                     <Card.Body>
                                         <Card.Title style={{textAlign : 'left'}}>{item.usuario.nome}</Card.Title>
-                            <Card.Text>{item.texto} </Card.Text>
+                                        <Card.Text>{item.texto} </Card.Text>
                             
                                         
                                         </Card.Body>
                                         <Card.Img variant="top" src={item.urlImagem}/>
                                         
-                                        <p style={{textAlign : 'center'}}>{curtida} Curtidas</p>
-           <button onClick={Curtida} style ={{ background:'green', color:'white', height : '35px'}} >Curtir</button>
+                                       
                                     </Card>
                                 </Col>
                             )
