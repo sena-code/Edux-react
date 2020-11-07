@@ -54,8 +54,6 @@ const Menu = () => {
                     <Dropdown.Item href="/admin/crudturmas">Turma</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudusuarios">Usuário</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item href="/admin/curtidas">Curtida</Dropdown.Item>
                     </DropdownButton>
                     <DropdownButton id="dropdown-basic-button" variant="danger" style={{paddingLeft : '15px'}} title={jwt_decode(token).nameid }>
                     <Dropdown.Item onClick={ event => sair(event)} href="#/action-1">Sair</Dropdown.Item>

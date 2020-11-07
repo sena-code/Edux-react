@@ -6,7 +6,6 @@ import Login from './pages/login/index';
 import Timeline from './pages/admin/timeline';
 import TimelineA from './pages/comum/timeline';
 import Rank from './pages/comum/rank';
-/*import CrudPost from './pages/comum/crudpost';*/
 import Objetivo from './pages/admin/objetivo';
 import CrudTurma from './pages/admin/crudturma';
 import CrudInstituicao from './pages/admin/crudinstituicao';
@@ -19,6 +18,7 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jwt_decode from 'jwt-decode';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import CrudCurtida from './pages/comum/crudcurtidas';
 
 const RotaPrivada = ({component : Component, ...rest}) => (
   <Route 
@@ -50,8 +50,6 @@ const routing = (
       <Route path='/login' component={Login} />
       <RotaPrivada path='/comum/timeline' component={TimelineA}/>
       <RotaPrivada path='/comum/rank' component={Rank}/>
-
- 
       <RotaPrivadaAdmin path='/admin/informacoes' component={Timeline}/>
       <RotaPrivadaAdmin path='/admin/crudprofessores' component={CrudProfessor}/>
       <RotaPrivadaAdmin path='/admin/crudusuarios' component={Cadastro}/>

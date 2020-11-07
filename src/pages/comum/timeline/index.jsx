@@ -23,6 +23,7 @@ const TimelineA = () => {
       useEffect(() => {
         listarPost();
         listarUsuario();
+        listarCurtida();
     }, [])
 
      const listarUsuario = () => {
@@ -47,15 +48,27 @@ const TimelineA = () => {
             setPost(dados.data);
             console.log(dados.data);
             
-           <div>
-           <h3>{curtida} Curtidas</h3>
-           <button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</button>
-           </div>
+          
                
             limparCampo();
+            listarCurtida();
         })
         .catch(err => console.error(err));
       }
+
+      const listarCurtida = () =>{
+        fetch(`${url}/Curtida`, {
+            headers : {
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setCurtida(data.data);
+
+        })
+        .catch(err => console.error(err));
+     }
       
 
       const salvar = (event) => {
@@ -191,7 +204,8 @@ const TimelineA = () => {
                                         <Card.Img variant="top" src={item.urlImagem}/>
                                         
                                         <p style={{textAlign : 'center'}}>{curtida} Curtidas</p>
-           <button onClick={Curtida} style ={{ background:'green', color:'white', height : '35px'}} >Curtir</button>
+                                        <button onClick={Curtida} style ={{ background:'green', color:'white', height : '35px'}} >Curtir</button>
+                                        <Button href ='/comum/rank' >Ver Curtidas</Button>{' '}
                                     </Card>
                                 </Col>
                             )

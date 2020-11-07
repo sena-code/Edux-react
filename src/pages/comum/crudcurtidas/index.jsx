@@ -14,7 +14,7 @@ const CrudCurtida = () => {
     useEffect(() => {
         listarCurtida();
     }, [])
-  
+    
     
      const listarCurtida = () =>{
         fetch(`${url}/Curtida`, {
@@ -26,21 +26,12 @@ const CrudCurtida = () => {
         .then(data => {
             setCurtida(data.data);
             
-            limparCampo();
         })
         .catch(err => console.error(err));
      }
-    
-     
-     //Metodo para limpar o campo do formulario após curtir o post
-     const limparCampo = () =>{
-            setId(0);
-            setLike('');
-            setIdUsuario('');
-     }
-     
-     //Metodo para excluir uma curtida
-     const remover = (event) => {
+        
+     //Metodo para dar dislike
+     const dislike = (event) => {
         event.preventDefault();
 
         fetch(url + '/Curtida/' + event.target.value,{
@@ -58,7 +49,7 @@ const CrudCurtida = () => {
      }
     
      //Metodo para adicionar uma curtida
-     const adicionar = (event) =>{
+     const curtir = (event) =>{
         event.preventDefault();
 
         const curtida = {
@@ -67,7 +58,7 @@ const CrudCurtida = () => {
         }
 
         let method = (id === 0 ? 'POST' : 'PUT');
-        let urlRequest = (id === 0 ? `${url}/Dica` :  `${url}/Dica/${id}`);
+        let urlRequest = (id === 0 ? `${url}/Curtida` :  `${url}/Curtida/${id}`);
         
          fetch(urlRequest ,{
              method : method,
@@ -91,21 +82,7 @@ const CrudCurtida = () => {
         <Menu />
         <Titulo titulo="Curtidas" chamada="Gerencie suas curtidas"/>
         <Container>
-            
-
-            <Card>
-                    <Card.Body>
-                    <Form onSubmit={event => adicionar(event)}>
-                        
-                        <Form.Group controlId="formCurtida">
-                            <Form.Label>Curtida</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={like} onChange={event => setCurtida(event.target.value)} />
-                        </Form.Group>
-                        
-
-                    </Form>
-                    </Card.Body>
-                </Card>
+        
                 <Card>
                     <Card.Body>
                     <Table bordered>
@@ -122,11 +99,11 @@ const CrudCurtida = () => {
                                 return (
                                     <tr key={index}>
 
-                                <td>{item.usuario.nome}</td>
+                                <td>{item.idUsuario}</td>
                                 <td>{item.like}</td>
                 
                                         <td>
-                                            <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '10px'}} onClick={ event => remover(event)}>Remover</Button>
+                                            <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '10px'}} onClick={ event => dislike(event)}>Dislike</Button>
                                         </td>
                                     </tr>
                                 )

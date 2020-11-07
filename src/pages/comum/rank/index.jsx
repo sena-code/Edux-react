@@ -126,6 +126,32 @@ const notaTotal = objetivoA.map(nota => {
         </Jumbotron>
 
 
+        <Jumbotron className="text-center" >
+            <h1>Ranking</h1>
+            <Card>
+                    <Card.Body>
+                    <Table bordered>
+                        <thead>
+                            <tr>
+                               
+                                <th>#</th>
+                                
+                                <th>Usuario</th>
+
+        
+
+    
+
+                            
+
+                            </tr>
+                        </thead>
+                    
+                    </Table>
+                    </Card.Body>
+                </Card>
+
+        </Jumbotron>
 
 
 
