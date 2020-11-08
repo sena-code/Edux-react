@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, UserContext, useContext} from 'react';
 import {url} from '../../../utils/constants'
 import { Carousel, Jumbotron, Button, Card, Row, Col, Container, Table, Form } from 'react-bootstrap';
 import Menu from '../../../components/menu/index';
@@ -18,12 +18,16 @@ const TimelineA = () => {
       const [texto, setTexto] = useState('');
       const [Imagem, setImagem] = useState('');
       const [curtida, setCurtida] = React.useState(0);
-      const token = localStorage.getItem('token-edux');
+      const [curtidas, setCurtidas] = useState([]);
+      
+     
+    
      
 
       useEffect(() => {
         listarPost();
         listarUsuario();
+        listarCurtida();
     }, [])
 
      const listarUsuario = () => {
@@ -33,6 +37,17 @@ const TimelineA = () => {
             setUsuario(dados);
             
             limparCampo();
+        })
+        .catch(err => console.error(err));
+      }
+
+      const listarCurtida = () => {
+        fetch(`${url}/Curtida`)
+        .then(response => response.json())
+        .then(dados => {
+            setCurtidas(dados);
+            
+       
         })
         .catch(err => console.error(err));
       }
@@ -56,12 +71,14 @@ const TimelineA = () => {
 
       const salvar = (event) => {
         event.preventDefault();
-
+        const token = localStorage.getItem('token-edux')
+        
+        let usuario = jwt_decode(token);
       
       
         const posts = {
             texto : texto,
-            idUsuario : idUsuario,
+            idUsuario : usuario.idUsuario,
             urlImagem : urlImagem
         }
 
@@ -120,9 +137,14 @@ const TimelineA = () => {
         setUrlImagem('');
     }
 
-     function Curtida () {
+     function Curtidas () {
          setCurtida (anterior => anterior + 1)
      }
+
+    
+
+
+  
       
     
         return (
@@ -148,22 +170,7 @@ const TimelineA = () => {
                             <Form.Control as="textarea" placeholder='Digite Aqui' rows={2} value={texto} onChange={event => setTexto(event.target.value)}   />
                            
                         </Form.Group>
-                        <Form.Control as="select" size="lg" custom defaultValue={idUsuario} onChange={event => setIdUsuario(event.target.value)} >
-                        <option value={0}>Selecione</option>
-                                {
-                                    usuario.map((item, index) => {
-                                       
-                                   
-                                    
-                                        return(
-                                        <option value={item.id}>{item.nome}</option>
-                                        )
-                                    
-                                        
-                                    })
-                                }
-                                    
-                                </Form.Control>
+                      
                         <Form.Group controlId="formNome">
                                 <Form.File id="fileCategoria" label="Imagem do Post"  onChange={event => uploadFile(event)} />
                                 { urlImagem && <img src={urlImagem} style={{ width : '160px'}} />}
@@ -194,10 +201,13 @@ const TimelineA = () => {
                                         
                                         </Card.Body>
                                         <Card.Img variant="top" src={item.urlImagem}/>
-                                        
-                                       
+                                        <Button className="material-icons"  onClick={Curtidas} style={{ background:'white', color:'black'}} >thumb_up</Button>
+                            <h6 style={{textAlign : 'center'}} >{curtida}</h6>
                                     </Card>
+                                  
+                            
                                 </Col>
+                                
                             )
                         })
                     }
