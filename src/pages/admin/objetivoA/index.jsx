@@ -9,7 +9,7 @@ const ObjetivoA = () => {
 
     const [ id, setId ] = useState(0);
     const [dataAlcancada, setDataAlcanca] = useState('');
-    const [idAlunoTurma, setidAlunoTurma] = useState('');
+    const [idUsuario, setidUsuario] = useState('');
     const [idObjetivo, setidObjetivo] = useState('');
     const [nota, setNota] = useState(0);
     const [objetivosA, setObjetivoA] = useState([]);
@@ -110,7 +110,7 @@ const ObjetivoA = () => {
             setDataAlcanca('');
             setNota(0);
             setidObjetivo('');
-            setidAlunoTurma('');
+            setidUsuario('');
 
     }
 
@@ -121,7 +121,7 @@ const ObjetivoA = () => {
             dataAlcancada : dataAlcancada, 
             idObjetivo : idObjetivo,
             nota : nota,
-            idAlunoTurma : idAlunoTurma
+            idUsuario : idUsuario
         }
     
 
@@ -160,7 +160,7 @@ const ObjetivoA = () => {
             setId(dado.id)
             setNota(dado.nota);
             setDataAlcanca(dado.dataAlcancada);
-            setidAlunoTurma(dado.idAlunoTurma);
+            setidUsuario(dado.idUsuario);
             setidObjetivo(dado.idObjetivo);
             console.log(dado);
         })
@@ -192,7 +192,7 @@ const ObjetivoA = () => {
             <Container>
                 
 
-                <Card>
+                <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px'}} >
                         <Card.Body>
                         <Form onSubmit={event => salvar(event)}>
                            
@@ -238,12 +238,12 @@ const ObjetivoA = () => {
 
                                 <Form.Group controlId="formObjetivo"></Form.Group>
                                 <Form.Label>Aluno Turma</Form.Label>
-                                <Form.Control as="select" size="lg" custom defaultValue={idAlunoTurma} onChange={event => setidAlunoTurma(event.target.value)} >
+                                <Form.Control as="select" size="lg" custom defaultValue={idUsuario} onChange={event => setidUsuario(event.target.value)} >
                                     <option value={0}>Selecione</option>
                                     {
-                                       alunoTurma.map((item, index) => {
+                                       Usuario.map((item, index) => {
                                             return(
-                                                <option key={index} value={item.id}>{item.usuario.nome}</option>
+                                                <option key={index} value={item.id}>{item.nome}</option>
                                             )
                                         })
                                     }
@@ -262,14 +262,14 @@ const ObjetivoA = () => {
                     </Card>
                     <Card>
                         <Card.Body>
-                        <Table bordered>
+                        <Table variant='dark' bordered>
                             <thead>
                                 <tr>
                                    
                                     <th>Nota</th>
                                     <th>Data Alcançada</th>
                                     <th>Objetivo</th>
-                                    <th>Id Aluno Turma</th>
+                                    <th>Id Aluno</th>
                                     <th>Ações</th>
                                     
                                 </tr>
@@ -287,7 +287,7 @@ const ObjetivoA = () => {
                                     <td>{item.dataAlcancada}</td>
                                     <td>{item.objetivo.descricao}</td>
                                     
-                                    <td>{item.idAlunoTurma}</td>
+                                    <td>{item.idUsuario}</td>
                                                
                                        
                                   

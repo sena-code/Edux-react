@@ -108,7 +108,7 @@ const CrudCurtida = () => {
                                     </tr>
                                 )
                                 })
-                            }
+                            }      
                         </tbody>
                     </Table>
                     </Card.Body>

@@ -132,11 +132,11 @@ const CrudProfessor = () => {
       return(<div>
             
         <Menu />
-        <Titulo titulo="Turmas" chamada="Gerencie turmas"/>
+        <Titulo titulo="Adicione professores a turmas" chamada="Gerencie professores "/>
         <Container>
             
 
-            <Card>
+            <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px'}} >
                     <Card.Body>
                     <Form onSubmit={event => salvar(event)}>
                         
@@ -180,7 +180,7 @@ const CrudProfessor = () => {
                 </Card>
                 <Card>
                     <Card.Body>
-                    <Table bordered>
+                    <Table variant='dark' bordered>
                         <thead>
                             <tr>
                                

@@ -7,6 +7,7 @@ import jwt_decode from 'jwt-decode';
 
 
 
+
 const TimelineA = () => {
 
       const [id, setId] = useState(0);
@@ -48,7 +49,10 @@ const TimelineA = () => {
             setPost(dados.data);
             console.log(dados.data);
             
-          
+            <div>
+            <p>{curtida} <a href ='/comum/rank'>Curtida</a></p>  <br></br>
+            <button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</button>
+           </div>
                
             limparCampo();
             listarCurtida();
@@ -98,6 +102,9 @@ const TimelineA = () => {
         .then(dados => {
             alert('Post salvo');
             console.log(dados)
+          
+       
+         
             listarPost();
         })
         .catch(err => console.error(err))
@@ -146,7 +153,7 @@ const TimelineA = () => {
     
         
         <Menu />
-        <Jumbotron className="text-center">
+        <Jumbotron   style={{backgroundColor : 'black', color:'white' }} className="text-center">
                 <h1>Timeline</h1>
                 
             
@@ -154,7 +161,7 @@ const TimelineA = () => {
 
             <Container>
 
-                <Card>
+                <Card style={{backgroundColor : '#1d1d1d' , color : 'white', marginBottom : '30px'}}>
                     <Card.Body>
          <Form onSubmit={event => salvar(event)}>
             <Form.Group controlId="formDescricao">
@@ -166,9 +173,14 @@ const TimelineA = () => {
                         <option value={0}>Selecione</option>
                                 {
                                     usuario.map((item, index) => {
-                                        return (
-                                            <option key={index} value={item.id}>{item.nome}</option>
+                                       
+                                   
+                                    
+                                        return(
+                                        <option value={item.id}>{item.nome}</option>
                                         )
+                                    
+                                        
                                     })
                                 }
                                     
@@ -186,26 +198,30 @@ const TimelineA = () => {
         <Jumbotron className="text-center" >
             <h1>Posts</h1>
            
+          
         </Jumbotron>
         <Container>
             
-            <Row>
+            <Row >
             {
                         post.map((item, index) => {
                             return (
-                                <Col key={index} style={{alignItems : 'center', paddingTop : '25px', paddingBottom : '55px'}} xs='8'>
-                                    <Card>
+                                <Col     key={index} style={{paddingTop : '25px', paddingBottom : '55px'}} xs='10'>
+                                    <Card style={{backgroundColor : '#1d1d1d', alignItens : 'center'}} text='white'>
                                     <Card.Body>
                                         <Card.Title style={{textAlign : 'left'}}>{item.usuario.nome}</Card.Title>
-                            <Card.Text>{item.texto} </Card.Text>
+                                        <Card.Text>{item.texto} </Card.Text>
                             
                                         
                                         </Card.Body>
                                         <Card.Img variant="top" src={item.urlImagem}/>
-                                        
-                                        <p style={{textAlign : 'center'}}>{curtida} Curtidas</p>
-                                        <button onClick={Curtida} style ={{ background:'green', color:'white', height : '35px'}} >Curtir</button>
-                                        <Button href ='/comum/rank' >Ver Curtidas</Button>{' '}
+                                        <div>
+                                        <p>{curtida} <a href ='/comum/rank'>Curtida</a></p>  <br></br>
+                                        <Button onClick={Curtida} style ={{ background:'green', color:'white'}} >Curtir</Button>
+                                        <Button href='/admin/crudobjetivos' >Ver curtidas</Button>{' '}
+
+                                        </div>
+                                       
                                     </Card>
                                 </Col>
                             )

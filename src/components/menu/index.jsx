@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Dropdown, DropdownButton, Button } from 'react-bootstrap';
 import jwt_decode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
-import logo from '../../assets/img/logo_2.png';
+import logo from '../../assets/img/logo_branco_2-8.png';
 
 
 
@@ -34,15 +34,14 @@ const Menu = () => {
             );
         } else if( jwt_decode(token).role === "Administrador"){
             return (
-                <Nav>
+                <Nav >
                    <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
                    <Button href="/comum/rank" style={{marginRight: '15px'}} variant="success"  >Ranking</Button>
                    <Button href="/admin/informacoes" style={{marginRight: '15px'}} variant="success"  >Informações</Button>
                     <DropdownButton id="dropdown-basic-button" variant="success" title="Cadastrar">
                     <Dropdown.Item href="/admin/crudcursos">Curso</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item href="/admin/cruinstituicao">Instituicao</Dropdown.Item>
-                    <Dropdown.Divider />
+                    
                     <Dropdown.Item href="/admin/cruddicas">Dica</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudobjetivos">Objetivo</Dropdown.Item>
@@ -54,6 +53,10 @@ const Menu = () => {
                     <Dropdown.Item href="/admin/crudturmas">Turma</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="/admin/crudusuarios">Usuário</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="/admin/crudinstituicao">Instituição</Dropdown.Item>
+                   
+                  
                     </DropdownButton>
                     <DropdownButton id="dropdown-basic-button" variant="danger" style={{paddingLeft : '15px'}} title={jwt_decode(token).nameid }>
                     <Dropdown.Item onClick={ event => sair(event)} href="#/action-1">Sair</Dropdown.Item>
@@ -67,6 +70,9 @@ const Menu = () => {
             return (
                 <Nav>
                     <Button href="/comum/timeline" style={{marginRight: '15px'}} variant="success"  >Timeline</Button>
+                    <Button href="/comum/objetivo" style={{marginRight: '15px'}} variant="success"  >Objetivos</Button>
+                    <Button href="/comum/objetivoA" style={{marginRight: '15px'}} variant="success"  >Seus Objetivos</Button>
+                    <Button href="/comum/dica" style={{marginRight: '15px'}} variant="success"  >Suas Dicas</Button>
                     <Button href="/comum/rank" style={{marginRight: '15px'}} variant="success"  >Ranking</Button>
                     <DropdownButton id="dropdown-basic-button" variant="danger" style={{paddingLeft : '15px'}} title={jwt_decode(token).nameid }>
                     <Dropdown.Item onClick={ event => sair(event)} href="#/action-1">Sair</Dropdown.Item>
@@ -76,7 +82,7 @@ const Menu = () => {
         }
     }
     return (
-        <Navbar bg="dark" expand="lg">
+        <Navbar style={{backgroundColor : '#1b1b1b'}}  expand="lg">
             <Navbar.Brand href="/"></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

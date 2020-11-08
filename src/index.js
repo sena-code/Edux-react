@@ -6,6 +6,9 @@ import Login from './pages/login/index';
 import Timeline from './pages/admin/timeline';
 import TimelineA from './pages/comum/timeline';
 import Rank from './pages/comum/rank';
+import ObjetivoComum from './pages/comum/objetivo';
+import ObjetivoAComum from './pages/comum/objetivoA';
+import DicaComum from './pages/comum/dica';
 import Objetivo from './pages/admin/objetivo';
 import CrudTurma from './pages/admin/crudturma';
 import CrudInstituicao from './pages/admin/crudinstituicao';
@@ -50,6 +53,11 @@ const routing = (
       <Route path='/login' component={Login} />
       <RotaPrivada path='/comum/timeline' component={TimelineA}/>
       <RotaPrivada path='/comum/rank' component={Rank}/>
+      <RotaPrivada path='/comum/objetivo' component={ObjetivoComum}/>
+      <RotaPrivada path='/comum/dica' component={DicaComum}/>
+      <RotaPrivada path='/comum/objetivoA' component={ObjetivoAComum}/>
+
+ 
       <RotaPrivadaAdmin path='/admin/informacoes' component={Timeline}/>
       <RotaPrivadaAdmin path='/admin/crudprofessores' component={CrudProfessor}/>
       <RotaPrivadaAdmin path='/admin/crudusuarios' component={Cadastro}/>

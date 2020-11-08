@@ -2,25 +2,26 @@ import React from 'react';
 import instagram from '../../assets/img/Instagram.jpg';
 import facebook from '../../assets/img/facebook.jpg';
 import twitter from '../../assets/img/twitter.jpg';
+import edux from '../../assets/img/logo_branco_2-8.png';
 
 
 const Rodape = () => {
     return (
-        <footer className="text-center" style={{ marginTop : '70px'}}>
-
-          <div style = {{ background:'#212529', color:'white'}}>
-          <h1>Projeto Edux</h1>
+        <footer className="text-center" style={{ marginTop : '70px', backgroundColor : 'black', color : 'white', height : '550px'}}>
+            <img src={edux} style={{width : '330px', paddingTop : '45px'}} alt='Logo Edux'/>
             <br></br>
-            <p >Desenvolvido por <a  href="https:/github.com/sena-code">Vinicius Sena</a></p> <br></br>
-            <p>Desenvolvido por <a href="https://github.com/Gustavo-oficial">Gustavo Felix</a></p>  <br></br>
-            <p>Desenvolvido por <a    href="https://github.com/felipemendesvidal">Felipe Vidal</a></p> <br></br>
-            <p>Desenvolvido por <a  href="https://github.com/https://github.com/Pamsg">Pedro Antônio</a></p>
-            <br></br>
-            <a  style = {{ padding:'20px'}} href="https://www.instagram.com/"><img src={instagram} alt="Instagram" style={{height : '40px', width : '40px'}} /></a>   
-            <a style = {{ padding:'20px'}} href=""><img src={facebook} alt="Facebook" style={{height : '41px', width : '41px'}} /></a>
-            <a style = {{ padding:'20px'}} href="https://twitter.com/login?lang=pt"><img src={twitter} alt="Twitter" style={{height : '37px', width : '37px'}} /></a>
+          <div style={{ flexDirection : 'row', justifyContent : 'center', padding : '25px', listStyle : 'none'}}>
+          <ul style={{listStyle : 'none'}}>
+          <li >Desenvolvido por <a  style={{color : 'gray'}} href="https:/github.com/sena-code">Vinicius Sena</a></li> <br></br>
+            <li>Desenvolvido por <a style={{color : 'gray'}} href="https://github.com/Gustavo-oficial">Gustavo Felix</a></li> <br></br>
+            <li>Desenvolvido por <a style={{color : 'gray'}} href="https://github.com/LaisMaas">Lais Maas</a></li> <br></br>
+            <li>Desenvolvido por <a style={{color : 'gray'}} href="https://github.com/felipemendesvidal">Felipe Vidal</a></li> <br></br>
+            <li>Desenvolvido por <a style={{color : 'gray'}} href="https://github.com/https://github.com/Pamsg">Pedro Antônio</a></li>
+          </ul>
+          <small>™ & © 2020 Projeto Edux, Inc.  Projeto Edux and a, Inc.  All Rights Reserved.</small>
           </div>
-         
+            <br></br>
+          
         </footer>
     )
 }
