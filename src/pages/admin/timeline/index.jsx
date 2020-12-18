@@ -406,7 +406,7 @@ const Timeline = () => {
                          </thead>
                         <tbody >
                         <tr >
-                    <td>{item.idUsuario}</td>
+                    <td>{item.usuario.nome}</td>
                     <td>{item.nota}</td>
                     <td>{item.dataAlcancada}</td>
                     
